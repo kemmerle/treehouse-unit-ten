@@ -4,12 +4,25 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const bodyParser = require("body-parser");
 
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
 // create the Express app
 const app = express();
+
+//bodyParser() allows form data to be available in req.body. The middleware to handle
+//url encoded data is returned by this bodyParser method.
+//Adapted from: https://www.npmjs.com/package/body-parser
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+//bodyParser.json() returns middleware that only parses json. This parser
+//accepts any Unicode encoding of the body. A new body object containing the
+//parsed data is populated on the request object after the middleware (i.e. req.body).
+//Adapted from: https://www.npmjs.com/package/body-parser.
+app.use(bodyParser.json())
 
 //Import folders with the routes for '/api/users' and '/api/courses'
 const userRoutes = require('./routes/users.js');
@@ -31,7 +44,7 @@ const sequelize = require('./models').sequelize;
 
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
-app.use(cors()); 
+app.use(cors());
 
 // TODO setup your api routes here
 app.use(express.json());
