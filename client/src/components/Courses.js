@@ -33,7 +33,7 @@ class Courses extends Component {
 
         {this.state.courses.map((course)=>
           <div className="grid-33" key={course.id}>
-            <a className="course--module course--link" href={"/courses/"+(course.id)}>
+            <a className="course--module course--link" href={`/courses/${course.id}`}>
             <h3 className="course--title">{course.title}</h3>
             </a>
           </div>
@@ -46,6 +46,7 @@ class Courses extends Component {
               </svg>New Course</h3>
           </a></div>
         </div>
+
       );
     };
 };
