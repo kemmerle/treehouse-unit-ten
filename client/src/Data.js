@@ -45,7 +45,7 @@ export default class Data {
       return await response.json();
     }
     else {
-      throw new Error();
+      return response.json();
     }
   }
 
@@ -55,11 +55,8 @@ export default class Data {
     if (response.status === 200) {
       return response.json().then(data => data);
     }
-    else if (response.status === 400) {
-      return response.json();
-    }
     else {
-      throw new Error();
+      return response.json();
     }
   }
 
@@ -68,9 +65,8 @@ export default class Data {
     const response = await this.api(`/courses/${id}`, 'GET', null);
     if (response.status === 200) {
       return response.json();
-    }
-    else if (response.status === 400) {
-      return null;
+    } else if (response.status === 404) {
+      return response.json();
     }
     else {
       throw new Error();
@@ -82,7 +78,7 @@ export default class Data {
     if (response.status === 201) {
       return [];
     }
-    else if (response.status === 400 || response.status === 401) {
+    else if (response.status === 400) {
       return response.json();
     }
     else {
@@ -96,7 +92,7 @@ export default class Data {
     if (response.status === 204) {
       return [];
     }
-    else if (response.status === 400 || response.status === 401) {
+    else if (response.status === 404 || response.status === 400 || response.status === 403 ) {
       return await response.json();
     }
     else {
@@ -108,8 +104,9 @@ export default class Data {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {emailAddress, password});
     if (response.status === 204) {
       return [];
-    }
-    else {
+    } else if (response.status === 404 || response.status === 403) {
+      return await response.json();
+    } else {
       throw new Error();
     }
   }

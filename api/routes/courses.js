@@ -131,7 +131,9 @@ router.put('/courses/:id', authenticateUser, async (req, res, next) => {
         //If the user hasn't included a title or description in the body of their
         //request, I send back a 400 status code and tell them they sent a bad
         //request.
-        res.status(400).json({ message: "Bad Request" })
+        res.status(400).json({
+          message: "Please make sure to include a title and description"
+        })
       }
     } else {
       //If the user does not own the course, then I send back a 403 status code

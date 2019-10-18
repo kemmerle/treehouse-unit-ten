@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import axios from 'axios';
+import CourseTile from './CourseTile';
 
 class Courses extends Component {
   constructor() {
@@ -10,41 +11,37 @@ class Courses extends Component {
     }
   }
 
-  componentDidMount() {
-    this.courseLoad()
-  }
-
-  courseLoad = () => {
-    axios.get(`http://localhost:5000/api/courses`)
-      .then(response => {
-        this.setState({
-          courses: response.data
-        });
-        console.log(this.state.courses);
+  componentDidMount(){
+    const { context } = this.props;
+    context.data.getCourses()
+    .then(courses =>{
+      this.setState({
+        courses
       })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
-  }
+      console.log(this.state.courses)
+    })
+  };
 
   render(){
       return(
         <div className="bounds">
 
-        {this.state.courses.map((course)=>
-          <div className="grid-33" key={course.id}>
-            <a className="course--module course--link" href={`/courses/${course.id}`}>
-            <h3 className="course--title">{course.title}</h3>
-            </a>
-          </div>
-        )}
+          {this.state.courses.map((course)=>
+            <CourseTile
+              title={course.title}
+              key={course.id}
+              id={course.id}
+            />
+          )}
 
-        <div className="grid-33"><a className="course--module course--add--module" href="/courses/create">
-            <h3 className="course--add--title"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+          <div className="grid-33">
+            <Link className="course--module course--add--module" to="/courses/create">
+              <h3 className="course--add--title"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 viewBox="0 0 13 13" className="add">
-                <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon>
-              </svg>New Course</h3>
-          </a></div>
+                  <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon>
+                </svg>New Course</h3>
+            </Link>
+          </div>
         </div>
 
       );
