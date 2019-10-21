@@ -17,9 +17,8 @@ export default class CourseDetails extends Component{
       if(response === 404){
         return this.props.history.push('/notfound')
       }
-
-      if(context.authenticatedUser != null){
-        if( context.authenticatedUser.id  === response.User.id){
+      if (context.authenticatedUser != null) {
+        if (context.authenticatedUser.id  === response.User.id) {
           this.setState({
             authorizedUser: true
           });

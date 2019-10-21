@@ -96,7 +96,8 @@ router.post('/courses', authenticateUser, async (req, res, next) => {
      //If there is a Sequelize Validation Error (a required field is missing), I
      //send the client a 400 status code and a Sequelize error message.
      if (err.name === "SequelizeValidationError") {
-       res.status(400).json({ error: err.message });
+       const errorMessages = err.errors.map(error => error.message);
+       res.status(400).json({ error: errorMessages });
      } else {
        //For any other error, I send it on to my global error handler.
        return next(err);

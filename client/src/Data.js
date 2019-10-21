@@ -39,13 +39,14 @@ export default class Data {
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
-      return [];
+      return null;
     }
     else if (response.status === 400) {
-      return await response.json();
+      const errors = await response.json();
+      return [response.status, errors];
     }
     else {
-      return response.json();
+      return await response.json();
     }
   }
 
@@ -79,7 +80,8 @@ export default class Data {
       return [];
     }
     else if (response.status === 400) {
-      return response.json();
+      const errors = await response.json();
+      return [response.status, errors];
     }
     else {
       throw new Error();

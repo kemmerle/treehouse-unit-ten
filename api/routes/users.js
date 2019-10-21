@@ -4,7 +4,6 @@
 const express = require('express');
 const router = express.Router();
 const morgan = require('morgan');
-const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
 
 // Imports the authenticateUser validation function from the validations folder.
@@ -34,20 +33,20 @@ router.get('/users', authenticateUser, async (req, res) => {
 
 router.post('/users', async(req, res, next) => {
   try{
-   //Before I create a user, I use the bcryptjs module to hash the user's password.
-   req.body.password = bcryptjs.hashSync(req.body.password)
-   //I create the user.
-   await User.create(req.body)
-   //I set the Location header to '/'
-   res.location('/');
-   //I send the client a 201 Created status code and end the request.
-   res.status(201).end();
+    //If there are no errors..
+       //I create the user.
+       await User.create(req.body)
+       //I set the Location header to '/'
+       res.location('/');
+       //I send the client a 201 Created status code and end the request.
+       res.status(201).end();
   } catch(err) {
     //If there is a Sequelize Validation Error (a required field is missing) or
     //if the user's email is not unique, I send them a 400 status code and a
     //Sequelize error message.
-    if (err.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
-      res.status(400).json({error: err.message})
+    if (err.name === "SequelizeValidationError" || err.name === "SequelizeUniqueConstraintError") {
+      const errorMessages = err.errors.map(error => error.message);
+      res.status(400).json({error: errorMessages});
     } else {
       //For any other error, I send it on to my global error handler.
       return next(err);
