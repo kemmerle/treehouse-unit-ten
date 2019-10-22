@@ -133,7 +133,7 @@ router.put('/courses/:id', authenticateUser, async (req, res, next) => {
         //request, I send back a 400 status code and tell them they sent a bad
         //request.
         res.status(400).json({
-          message: "Please make sure to include a title and description"
+          error: ["Please make sure to include a title and description"]
         })
       }
     } else {

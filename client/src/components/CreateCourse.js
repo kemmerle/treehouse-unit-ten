@@ -19,7 +19,7 @@ export default class CreateCourse extends Component {
       errors,
     } = this.state;
     const { context } = this.props;
-    const name = `${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`
+    const studentName = `${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`
 
     return (
         <div className="bounds course--detail">
@@ -42,7 +42,7 @@ export default class CreateCourse extends Component {
                     value={title}
                     onChange={this.change}
                     placeholder="Course Title..." />
-                  <p>by {name}</p>
+                  <p>by {studentName}</p>
                 </div>
                 <div className="course--description">
                   <textarea

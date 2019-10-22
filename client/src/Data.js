@@ -27,11 +27,11 @@ export default class Data {
     const response = await this.api('/users', 'GET', null, true, {emailAddress, password});
     if (response.status === 200) {
       return response.json().then(data => data);
-    }
-    else if (response.status === 401) {
+    } else if (response.status === 401) {
       return null;
-    }
-    else {
+    } else if (response.status === 500) {
+      window.location.href = '/error';
+    } else {
       throw new Error();
     }
   }
@@ -40,36 +40,36 @@ export default class Data {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
       return null;
-    }
-    else if (response.status === 400) {
+    } else if (response.status === 400) {
       const errors = await response.json();
       return [response.status, errors];
-    }
-    else {
+    } else if (response.status === 500) {
+      window.location.href = '/error';
+    } else {
       return await response.json();
     }
   }
-
 
   async getCourses(){
     const response = await this.api('/courses', 'GET', null);
     if (response.status === 200) {
       return response.json().then(data => data);
-    }
-    else {
+    } else if (response.status === 500) {
+      window.location.href = '/error';
+    } else {
       return response.json();
     }
   }
-
 
   async getCourse(id) {
     const response = await this.api(`/courses/${id}`, 'GET', null);
     if (response.status === 200) {
       return response.json();
     } else if (response.status === 404) {
-      return response.json();
-    }
-    else {
+      window.location.href = '/notfound';
+    } else if (response.status === 500) {
+      window.location.href = '/error';
+    } else {
       throw new Error();
     }
   }
@@ -78,26 +78,26 @@ export default class Data {
     const response = await this.api('/courses/', 'POST', course, true, {emailAddress, password});
     if (response.status === 201) {
       return null;
-    }
-    else if (response.status === 400) {
+    } else if (response.status === 400) {
       const errors = await response.json();
       return [response.status, errors];
-    }
-    else {
+    } else if (response.status === 500) {
+      window.location.href = '/error';
+    } else {
       throw new Error();
     }
-
   }
 
   async updateCourse(course, id, {emailAddress, password}) {
     const response = await this.api(`/courses/${id}`, 'PUT', course, true, {emailAddress, password});
     if (response.status === 204) {
       return null;
-    }
-    else if (response.status === 404 || response.status === 400 || response.status === 403 ) {
-      return await response.json();
-    }
-    else {
+    } else if (response.status === 400) {
+      const errors = await response.json();
+      return [response.status, errors];
+    } else if (response.status === 500) {
+      window.location.href = '/error';
+    } else {
       throw new Error();
     }
   }
@@ -105,12 +105,11 @@ export default class Data {
   async deleteCourse(id, {emailAddress, password}) {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {emailAddress, password});
     if (response.status === 204) {
-      return [];
-    } else if (response.status === 404 || response.status === 403) {
-      return await response.json();
+      return null;
+    } else if (response.status === 500) {
+      window.location.href = '/error';
     } else {
       throw new Error();
     }
   }
-
 }
