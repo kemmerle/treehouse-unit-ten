@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
-export default class CourseDetails extends Component{
+export default class CourseDetail extends Component{
   state = {
     course: [],
     studentName: '',
@@ -104,7 +104,6 @@ export default class CourseDetails extends Component{
          </div>
         </div>
       </div>
-
     )
   }
 }

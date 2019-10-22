@@ -77,7 +77,7 @@ export default class Data {
   async createCourse(course, {emailAddress, password}) {
     const response = await this.api('/courses/', 'POST', course, true, {emailAddress, password});
     if (response.status === 201) {
-      return [];
+      return null;
     }
     else if (response.status === 400) {
       const errors = await response.json();
@@ -92,7 +92,7 @@ export default class Data {
   async updateCourse(course, id, {emailAddress, password}) {
     const response = await this.api(`/courses/${id}`, 'PUT', course, true, {emailAddress, password});
     if (response.status === 204) {
-      return [];
+      return null;
     }
     else if (response.status === 404 || response.status === 400 || response.status === 403 ) {
       return await response.json();
