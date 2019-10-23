@@ -8,6 +8,7 @@ export default class UserSignUp extends Component {
     lastName: '',
     emailAddress: '',
     password: '',
+    confirmPassword: '',
     errors: []
   }
 
@@ -17,6 +18,7 @@ export default class UserSignUp extends Component {
       lastName,
       emailAddress,
       password,
+      confirmPassword,
       errors
     } = this.state;
 
@@ -59,6 +61,13 @@ export default class UserSignUp extends Component {
                   value={password}
                   onChange={this.change}
                   placeholder="Password" />
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={this.change}
+                  placeholder="Confirm Password" />
               </React.Fragment>
             )} />
           <p>
@@ -86,8 +95,13 @@ export default class UserSignUp extends Component {
       firstName,
       lastName,
       emailAddress,
-      password
+      password,
+      confirmPassword
     } = this.state;
+
+    if (password !== confirmPassword) {
+      return this.setState({ errors: ['Please confirm your password again.']})
+    }
 
     // Create user
     const user = {
@@ -96,6 +110,7 @@ export default class UserSignUp extends Component {
       emailAddress,
       password
     };
+
     context.data.createUser(user)
        .then(response => {
           if (Array.isArray(response)) {

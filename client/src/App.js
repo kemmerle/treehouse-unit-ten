@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header';
-import NotFound from './components/NotFound';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
@@ -14,6 +13,7 @@ import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
+import NotFound from './components/NotFound';
 import Forbidden from './components/Forbidden';
 import UnhandledError from './components/UnhandledError';
 

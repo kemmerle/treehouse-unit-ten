@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import CourseTile from './CourseTile';
 
-class Courses extends Component {
+export default class Courses extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,7 +14,7 @@ class Courses extends Component {
   componentDidMount(){
     const { context } = this.props;
     context.data.getCourses()
-    .then(courses =>{
+    .then(courses => {
       this.setState({
         courses
       })
@@ -46,5 +46,3 @@ class Courses extends Component {
       );
     };
 };
-
-export default Courses;

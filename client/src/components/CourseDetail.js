@@ -37,7 +37,7 @@ export default class CourseDetail extends Component{
     let { course, studentName, authorizedUser } = this.state;
     let emailAddress;
     let password;
-    if(authorizedUser){
+    if (authorizedUser) {
       emailAddress = context.authenticatedUser.emailAddress
       password = context.authenticatedUserPassword
     }
