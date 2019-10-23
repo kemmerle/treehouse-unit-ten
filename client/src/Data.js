@@ -15,7 +15,7 @@ export default class Data {
       options.body = JSON.stringify(body);
     }
 
-    if(requiresAuth){
+    if (requiresAuth) {
       const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
@@ -46,7 +46,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      return await response.json();
+      throw new Error();
     }
   }
 
@@ -57,7 +57,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      return response.json();
+      throw new Error(); 
     }
   }
 

@@ -18,7 +18,6 @@ class Courses extends Component {
       this.setState({
         courses
       })
-      console.log(this.state.courses)
     })
   };
 

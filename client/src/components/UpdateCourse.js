@@ -14,16 +14,16 @@ export default class UpdateCourse extends Component {
 
   async componentDidMount(){
     const { context } = this.props;
-    const { match } = this.props;
-    await context.data.getCourse(match.params.id)
+
+    await context.data.getCourse(this.props.match.params.id)
       .then(course => {
-        const studentName = `${course.User.firstName} ${course.User.lastName}`
         const {
           title,
           description,
           estimatedTime,
           materialsNeeded
         } = course;
+        const studentName = `${course.User.firstName} ${course.User.lastName}`
 
         this.setState({
           title,
@@ -35,9 +35,9 @@ export default class UpdateCourse extends Component {
         })
       });
 
-    if (this.state.course.User.emailAddress !== context.authenticatedUser) {
-      window.location.href = '/forbidden';
-    }
+      if (this.state.course.User.id !== context.authenticatedUser.id) {
+        this.props.history.push('/forbidden');
+      }
   }
 
   render(){
@@ -133,8 +133,7 @@ export default class UpdateCourse extends Component {
   }
 
   submit = () => {
-
-    const {context} = this.props;
+    const { context } = this.props;
     const {
       title,
       description,

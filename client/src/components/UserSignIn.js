@@ -64,7 +64,6 @@ export default class UserSignIn extends Component {
 
   submit = () => {
     const { context } = this.props;
-    console.log(this.props);
     const { emailAddress, password } = this.state;
 
     context.actions.signIn(emailAddress, password)
@@ -74,7 +73,7 @@ export default class UserSignIn extends Component {
             return { errors: [ 'Sign-in was unsuccessful' ] };
           });
         } else {
-          window.history.back(); 
+          window.history.back();
         }
       })
       .catch((error) => {

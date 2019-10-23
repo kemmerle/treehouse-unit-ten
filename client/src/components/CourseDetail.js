@@ -11,12 +11,9 @@ export default class CourseDetail extends Component{
 
   async componentDidMount(){
     const { context } = this.props;
-    const { match } = this.props;
-    await context.data.getCourse(match.params.id)
+
+    await context.data.getCourse(this.props.match.params.id)
     .then(response => {
-      if(response === 404){
-        return this.props.history.push('/notfound')
-      }
       if (context.authenticatedUser != null) {
         if (context.authenticatedUser.id  === response.User.id) {
           this.setState({
@@ -37,7 +34,6 @@ export default class CourseDetail extends Component{
 
   render(){
     const { context } = this.props;
-    const { match } = this.props;
     let { course, studentName, authorizedUser } = this.state;
     let emailAddress;
     let password;
@@ -54,7 +50,7 @@ export default class CourseDetail extends Component{
                 <span>
                   <Link
                     className="button"
-                    to={`/courses/${match.params.id}/update`}
+                    to={`/courses/${this.props.match.params.id}/update`}
                   >
                     Update Course
                   </Link>

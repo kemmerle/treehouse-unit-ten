@@ -11,6 +11,7 @@ export default class CreateCourse extends Component {
   }
 
   render() {
+    const { context } = this.props;
     const {
       title,
       description,
@@ -18,7 +19,6 @@ export default class CreateCourse extends Component {
       materialsNeeded,
       errors,
     } = this.state;
-    const { context } = this.props;
     const studentName = `${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`
 
     return (
@@ -111,19 +111,18 @@ export default class CreateCourse extends Component {
         description,
         estimatedTime,
         materialsNeeded
-    }
+      }
 
-    context.data.createCourse(course, {emailAddress, password})
-      .then(response => {
-        if (Array.isArray(response)) {
-          this.setState({errors: response[1].error})
-        } else {
-          console.log(`Success!- ${title} is succesfully Created!`);
-          this.props.history.push('/');
-        }
-      }).catch(err =>{
-        console.log(err);
-      });
+      context.data.createCourse(course, {emailAddress, password})
+        .then(response => {
+          if (Array.isArray(response)) {
+            this.setState({errors: response[1].error})
+          } else {
+            this.props.history.push('/');
+          }
+        }).catch(err =>{
+          console.log(err);
+        });
     }
 
     cancel = () => {

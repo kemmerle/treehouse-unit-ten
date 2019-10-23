@@ -98,7 +98,6 @@ export default class UserSignUp extends Component {
     };
     context.data.createUser(user)
        .then(response => {
-         console.log(user);
           if (Array.isArray(response)) {
             this.setState({errors: response[1].error})
           } else {
