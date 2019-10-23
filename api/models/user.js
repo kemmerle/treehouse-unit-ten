@@ -1,4 +1,6 @@
 'use strict';
+const bcryptjs = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {
@@ -52,6 +54,11 @@ module.exports = (sequelize, DataTypes) => {
     password: {
      type: DataTypes.STRING,
      allowNull: false,
+     set(value) {
+       if (value !== '' && value !== null) {
+         this.setDataValue('password', bcryptjs.hashSync(value))
+       }
+     },
      validate: {
       notNull: {
         msg: 'Please provide a password',
