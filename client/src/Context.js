@@ -6,6 +6,9 @@ const Context = React.createContext();
 
 export class Provider extends Component {
 
+  //In state, I retrieve my authenticatedUser and authenticatedUserPassword from
+  //my Cookies (part of the js-cookie npm module). If there are no cookies, I
+  //set both properties to null.
   state = {
     authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
     authenticatedUserPassword: Cookies.getJSON('userPassword') || null
@@ -17,7 +20,12 @@ export class Provider extends Component {
   }
 
   render() {
+    //I retrieve my authenticated user's information from state and save it as
+    //handy variables.
     const { authenticatedUser, authenticatedUserPassword } = this.state;
+    //I save my authenticated user's information, the data associated with my
+    //Context (stored in Data.js), and the actions defined below to an object
+    //named value, which I then pass to my Context to hand down to all my components.
     const value = {
       authenticatedUser,
       authenticatedUserPassword,
@@ -35,6 +43,9 @@ export class Provider extends Component {
   }
 
 
+  /*In my signIn method, I retrieve my user information from my API using my
+  getUser method stored in Data.js. I then save this user information in state,
+  and I set my Cookies, so that my user data can be stored for one day. */
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
     if (user !== null) {
@@ -55,6 +66,8 @@ export class Provider extends Component {
     return user;
   }
 
+  //In my signOut method, I set both properties in state to null (removing the
+  //user's information), and I remove the Cookies that store that data, as well.
   signOut = () => {
     this.setState({
       authenticatedUser: null,
@@ -67,6 +80,8 @@ export class Provider extends Component {
 
 export const Consumer = Context.Consumer;
 
+//I export the function withContext() which I can then use in my App.js to ensure
+//that all my components receive the data stored in Context.
 export default function withContext(Component) {
   return function ContextComponent(props) {
     return (
