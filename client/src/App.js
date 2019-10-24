@@ -20,6 +20,8 @@ import UnhandledError from './components/UnhandledError';
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 
+//I use the withContext() function that I exported from my Context component to
+//ensure that all my components have access to the data stored in Context.
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
 const CreateCourseWithContext = withContext(CreateCourse);
