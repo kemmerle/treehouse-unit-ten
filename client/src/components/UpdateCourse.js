@@ -162,6 +162,7 @@ export default class UpdateCourse extends Component {
   }
 
   cancel = () => {
-    this.props.history.push('/');
+    const {id} = this.state.course;
+    this.props.history.push(`/courses/${id}`);
   }
 }

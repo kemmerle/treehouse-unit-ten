@@ -32,7 +32,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      throw new Error();
+      window.location.href = '/error';
     }
   }
 
@@ -46,7 +46,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      throw new Error();
+      window.location.href = '/error';
     }
   }
 
@@ -57,7 +57,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      throw new Error(); 
+      throw new Error();
     }
   }
 
@@ -70,7 +70,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      throw new Error();
+      window.location.href = '/error';
     }
   }
 
@@ -84,7 +84,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      throw new Error();
+      window.location.href = '/error';
     }
   }
 
@@ -98,7 +98,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      throw new Error();
+      window.location.href = '/error';
     }
   }
 
@@ -109,7 +109,7 @@ export default class Data {
     } else if (response.status === 500) {
       window.location.href = '/error';
     } else {
-      throw new Error();
+      window.location.href = '/error';
     }
   }
 }

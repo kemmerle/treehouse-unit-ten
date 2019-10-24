@@ -48,7 +48,7 @@ export class Provider extends Component {
       //variable, but when I used that variable to set the cookie's expiration,
       //I received the following error: Unhandled Rejection (TypeError):
       //attributes[attributeName].split is not a function. Simply removing the
-      //variable seemed to solve the issue. 
+      //variable seemed to solve the issue.
       Cookies.set('authenticatedUser', JSON.stringify(user), {expires: 1});
       Cookies.set('userPassword', JSON.stringify(password), {expires: 1});
     }
