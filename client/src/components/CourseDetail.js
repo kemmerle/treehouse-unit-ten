@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 export default class CourseDetail extends Component{
-  //Here I set the initial state of the component and give it three properties:
-  //course (an empty array), studentName, an empty string, and authorizedUser, a
-  //boolean set to false.
+  /* Here I set the initial state of the component and give it three properties:
+  course (an empty array), studentName, an empty string, and authorizedUser, a
+  boolean set to false. */
   state = {
     course: [],
     studentName: '',
@@ -36,8 +36,8 @@ export default class CourseDetail extends Component{
           });
         }
       }
-      //No matter whether the user is authorized or not, I need to set my course
-      //property in state to the API's response, and I set my studentName property.
+      /* No matter whether the user is authorized or not, I need to set my course
+      property in state to the API's response, and I set my studentName property.*/
       this.setState({
         course: response,
         studentName: `${response.User.firstName} ${response.User.lastName}`
@@ -46,19 +46,19 @@ export default class CourseDetail extends Component{
   }
 
   render(){
-    //In my render, first I retrieve my context from props and save it to a handy
-    //variable. Then I retrieve course, studentName, and authorizedUser from states
-    //and save them to their own handy variables.
+    /* In my render, first I retrieve my context from props and save it to a handy
+    variable. Then I retrieve course, studentName, and authorizedUser from state
+    and save them to their own handy variables. */
     const { context } = this.props;
     let { course, studentName, authorizedUser } = this.state;
-    //I declare emailAddress and password, so they are accessible outside of the
-    //conditional.
+    /* I declare emailAddress and password, so they are accessible outside of the
+    conditional. */
     let emailAddress;
     let password;
-    //If the authorizedUser returns as true, I set the variables emailAddress and
-    //the password to the email address and password associated with the authenticated
-    //user in my context. I need this information to send my DELETE request for
-    //the course.
+    /* If the authorizedUser returns as true, I set the variables emailAddress and
+    the password to the email address and password associated with the authenticated
+    user in my context. I need this information to send my DELETE request for
+    the course. */
     if (authorizedUser) {
       emailAddress = context.authenticatedUser.emailAddress
       password = context.authenticatedUserPassword

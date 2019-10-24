@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import CourseTile from './CourseTile';
 
 export default class Courses extends Component {
-  //Here I set the initial state of the component and give it one property:
-  //courses (an empty array), where I'll hold all the information for my courses.
+  /* Here I set the initial state of the component and give it one property:
+  courses (an empty array), where I'll hold all the information for my courses. */
   constructor() {
     super();
     this.state = {
@@ -18,8 +18,8 @@ export default class Courses extends Component {
     //I retrieve my context from props and save it to a handy variable.
     const { context } = this.props;
 
-    //I call my getCourses() method, stored in my Context, to collect my courses
-    //data.
+    /* I call my getCourses() method, stored in my Context, to collect my courses
+    data. */
     context.data.getCourses()
     .then(courses => {
       //If the request is successful, then I store the response in state as courses.
@@ -33,7 +33,7 @@ export default class Courses extends Component {
       return(
         <div className="bounds">
 
-          {/* I map over my courses property in state. For each course, I create 
+          {/* I map over my courses property in state. For each course, I create
             a CourseTile component. */}
           {this.state.courses.map((course)=>
             <CourseTile
